@@ -13,6 +13,7 @@ exports.getList = function (req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
+            
             res.jsonp({
                 status: 200,
                 data: datas
