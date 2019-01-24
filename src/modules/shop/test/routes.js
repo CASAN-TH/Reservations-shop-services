@@ -16,7 +16,14 @@ describe('Shop CRUD routes tests', function () {
 
     before(function (done) {
         mockup = {
-            name: 'name'
+            name: 'name',
+            image: 'image.jpg',
+            imagereview: ['image.jpg', 'image1.jpg', 'image2.jpg'],
+            descreiption: {
+                title: "ข้อมูลของร้าน 1",
+                detail: "อร่อยมาก",
+            },
+            address_id: "564646d54f4s68d4f"
         };
         credentials = {
             username: 'username',
@@ -32,21 +39,36 @@ describe('Shop CRUD routes tests', function () {
         done();
     });
 
-    it('should be Shop get use token', (done)=>{
-        request(app)
-        .get('/api/shops')
-        .set('Authorization', 'Bearer ' + token)
-        .expect(200)
-        .end((err, res)=>{
-            if (err) {
-                return done(err);
-            }
-            var resp = res.body;
-            done();
+    it('should be Shop get use token', (done) => {
+
+        var shop1 = new Shop({
+            name: 'name',
+            image: 'image.jpg',
+            imagereview: ['image.jpg', 'image1.jpg', 'image2.jpg'],
+            descreiption: {
+                title: "ข้อมูลของร้าน 1",
+                detail: "อร่อยมาก",
+            },
+            address_id: "564646d54f4s68d4f"
+        });
+        shop1.save(function (err, sh1) {
+            request(app)
+                .get('/api/shops')
+                .set('Authorization', 'Bearer ' + token)
+                .expect(200)
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    }
+                    var resp = res.body;
+                    done();
+                });
         });
     });
 
     it('should be Shop get by id', function (done) {
+
+
 
         request(app)
             .post('/api/shops')
@@ -69,13 +91,18 @@ describe('Shop CRUD routes tests', function () {
                         var resp = res.body;
                         assert.equal(resp.status, 200);
                         assert.equal(resp.data.name, mockup.name);
+                        assert.equal(resp.data.image, mockup.image);
+                        assert.equal(resp.data.imagereview.length, 3);
+                        assert.equal(resp.data.descreiption.title, mockup.descreiption.title);
+                        assert.equal(resp.data.descreiption.detail, mockup.descreiption.detail);
+                        assert.equal(resp.data.address_id, mockup.address_id);
                         done();
                     });
             });
 
     });
 
-    it('should be Shop post use token', (done)=>{
+    it('should be Shop post use token', (done) => {
         request(app)
             .post('/api/shops')
             .set('Authorization', 'Bearer ' + token)
@@ -144,15 +171,15 @@ describe('Shop CRUD routes tests', function () {
 
     });
 
-    xit('should be shop get not use token', (done)=>{
+    xit('should be shop get not use token', (done) => {
         request(app)
-        .get('/api/shops')
-        .expect(403)
-        .expect({
-            status: 403,
-            message: 'User is not authorized'
-        })
-        .end(done);
+            .get('/api/shops')
+            .expect(403)
+            .expect({
+                status: 403,
+                message: 'User is not authorized'
+            })
+            .end(done);
     });
 
     xit('should be shop post not use token', function (done) {

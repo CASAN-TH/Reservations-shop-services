@@ -13,12 +13,13 @@ exports.getList = function (req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
+            console.log(datas)
             res.jsonp({
                 status: 200,
                 data: datas
             });
         };
-    });
+    }).select('_id name image');
 };
 
 exports.create = function (req, res) {

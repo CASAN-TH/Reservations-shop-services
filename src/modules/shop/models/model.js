@@ -9,6 +9,31 @@ var ShopSchema = new Schema({
         type: String,
         required: 'Please fill a Shop name',
     },
+    image:{
+        type:String
+    },
+    imagereview: {
+        type: [String]
+    },
+    descreiption: {
+        type: {
+            title: {
+                type: String
+            },
+            detail: {
+                type: String
+            }
+        }
+    },
+    starttime:{
+        type:Date
+    },
+    endtime:{
+        type:Date
+    },
+    address_id:{
+        type:String
+    },
     created: {
         type: Date,
         default: Date.now
