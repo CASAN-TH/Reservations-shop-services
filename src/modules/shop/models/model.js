@@ -33,7 +33,6 @@ var ShopSchema = new Schema({
     },
     house_no: {
         type: String,
-        required: 'Please fill a Address name',
     },
     village:{
         type:String
