@@ -31,7 +31,23 @@ var ShopSchema = new Schema({
     endtime:{
         type:Date
     },
-    address_id:{
+    house_no: {
+        type: String,
+        required: 'Please fill a Address name',
+    },
+    village:{
+        type:String
+    },
+    subdistrict:{
+        type:String
+    },
+    district:{
+        type:String
+    },
+    province:{
+        type:String
+    },
+    postalcode:{
         type:String
     },
     created: {

@@ -23,7 +23,12 @@ describe('Shop CRUD routes tests', function () {
                 title: "ข้อมูลของร้าน 1",
                 detail: "อร่อยมาก",
             },
-            address_id: "564646d54f4s68d4f"
+            house_no: 'house_no',
+            village: 'village',
+            subdistrict: 'subdistrict',
+            district: 'district',
+            province: 'province',
+            postalcode: 'postalcode'
         };
         credentials = {
             username: 'username',
@@ -96,6 +101,14 @@ describe('Shop CRUD routes tests', function () {
                         assert.equal(resp.data.descreiption.title, mockup.descreiption.title);
                         assert.equal(resp.data.descreiption.detail, mockup.descreiption.detail);
                         assert.equal(resp.data.address_id, mockup.address_id);
+
+                        assert.equal(resp.data.house_no, mockup.house_no);
+                        assert.equal(resp.data.village, mockup.village);
+                        assert.equal(resp.data.subdistrict, mockup.subdistrict);
+                        assert.equal(resp.data.district, mockup.district);
+                        assert.equal(resp.data.province, mockup.province);
+                        assert.equal(resp.data.postalcode, mockup.postalcode);
+
                         done();
                     });
             });
