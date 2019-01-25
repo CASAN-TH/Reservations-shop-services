@@ -171,7 +171,7 @@ describe('Shop CRUD routes tests', function () {
 
     });
 
-    xit('should be shop get not use token', (done) => {
+    it('should be shop get not use token', (done) => {
         request(app)
             .get('/api/shops')
             .expect(403)
@@ -182,7 +182,7 @@ describe('Shop CRUD routes tests', function () {
             .end(done);
     });
 
-    xit('should be shop post not use token', function (done) {
+    it('should be shop post not use token', function (done) {
 
         request(app)
             .post('/api/shops')
@@ -196,7 +196,7 @@ describe('Shop CRUD routes tests', function () {
 
     });
 
-    xit('should be shop put not use token', function (done) {
+    it('should be shop put not use token', function (done) {
 
         request(app)
             .post('/api/shops')
@@ -224,7 +224,7 @@ describe('Shop CRUD routes tests', function () {
 
     });
 
-    xit('should be shop delete not use token', function (done) {
+    it('should be shop delete not use token', function (done) {
 
         request(app)
             .post('/api/shops')
