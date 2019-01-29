@@ -22,6 +22,23 @@ exports.getList = function (req, res) {
     }).select('_id name image');
 };
 
+exports.getShopList = function (req, res) {
+    Shop.find(function (err, datas) {
+        if (err) {
+            return res.status(400).send({
+                status: 400,
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            console.log(datas)
+            res.jsonp({
+                status: 200,
+                data: datas
+            });
+        };
+    });
+}
+
 exports.create = function (req, res) {
         var newShop = new Shop(req.body);
         newShop.createby = req.user;

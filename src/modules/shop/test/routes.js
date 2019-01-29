@@ -115,6 +115,21 @@ describe('Shop CRUD routes tests', function () {
 
     });
 
+    it('should be Shop', function (done) {
+
+        request(app)
+            .get('/api/shoplist')
+            .set('Authorization', 'Bearer ' + token)
+            .expect(200)
+            .end(function (err, res) {
+                if (err) {
+                    return done(err);
+                }
+                var resp = res.body;
+                done();
+            });
+    });
+
     it('should be Shop post use token', (done) => {
         request(app)
             .post('/api/shops')
