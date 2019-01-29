@@ -19,7 +19,7 @@ exports.getList = function (req, res) {
                 data: datas
             });
         };
-    }).select('_id name image');
+    })
 };
 
 exports.getShopList = function (req, res) {
@@ -36,7 +36,7 @@ exports.getShopList = function (req, res) {
                 data: datas
             });
         };
-    });
+    }).select('_id name image');
 }
 
 exports.create = function (req, res) {
