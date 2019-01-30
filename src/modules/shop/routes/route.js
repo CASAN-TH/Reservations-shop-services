@@ -12,8 +12,11 @@ module.exports = function (app) {
         .get(controller.read)
         .put(controller.update)
         .delete(controller.delete);
-        
+
     app.route('/api/shoplist')
         .get(controller.getShopList)
-    app.param('shopId', controller.getByID);
+
+    app.route('/api/shoplist/:shopId')
+        .get(controller.read)
+    app.param('shopId', controller.getByID, controller.getShopByID);
 }

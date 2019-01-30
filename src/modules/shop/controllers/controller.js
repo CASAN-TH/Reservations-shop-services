@@ -13,7 +13,7 @@ exports.getList = function (req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            console.log(datas)
+            // console.log(datas)
             res.jsonp({
                 status: 200,
                 data: datas
@@ -30,7 +30,7 @@ exports.getShopList = function (req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            console.log(datas)
+            // console.log(datas)
             res.jsonp({
                 status: 200,
                 data: datas
@@ -85,6 +85,28 @@ exports.read = function (req, res) {
         data: req.data ? req.data : []
     });
 };
+
+exports.getShopByID = function (req, res, next, id) {
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).send({
+            status: 400,
+            message: 'Id is invalid'
+        });
+    }
+
+    Shop.findById(id, function (err, data) {
+        if (err) {
+            return res.status(400).send({
+                status: 400,
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            req.data = data ? data : {};
+            next();
+        };
+    });
+}
 
 exports.update = function (req, res) {
     var updShop = _.extend(req.data, req.body);
