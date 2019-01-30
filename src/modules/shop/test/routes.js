@@ -115,6 +115,48 @@ describe('Shop CRUD routes tests', function () {
 
     });
 
+    it('should be Shop Detail get by id', function (done) {
+
+        request(app)
+            .post('/api/shops')
+            .set('Authorization', 'Bearer ' + token)
+            .send(mockup)
+            .expect(200)
+            .end(function (err, res) {
+                if (err) {
+                    return done(err);
+                }
+                var resp = res.body;
+                request(app)
+                    .get('/api/shoplist/' + resp.data._id)
+                    .set('Authorization', 'Bearer ' + token)
+                    .expect(200)
+                    .end(function (err, res) {
+                        if (err) {
+                            return done(err);
+                        }
+                        var resp = res.body;
+                        assert.equal(resp.status, 200);
+                        assert.equal(resp.data.name, mockup.name);
+                        assert.equal(resp.data.image, mockup.image);
+                        assert.equal(resp.data.imagereview.length, 3);
+                        assert.equal(resp.data.descreiption.title, mockup.descreiption.title);
+                        assert.equal(resp.data.descreiption.detail, mockup.descreiption.detail);
+                        assert.equal(resp.data.address_id, mockup.address_id);
+
+                        assert.equal(resp.data.house_no, mockup.house_no);
+                        assert.equal(resp.data.village, mockup.village);
+                        assert.equal(resp.data.subdistrict, mockup.subdistrict);
+                        assert.equal(resp.data.district, mockup.district);
+                        assert.equal(resp.data.province, mockup.province);
+                        assert.equal(resp.data.postalcode, mockup.postalcode);
+
+                        done();
+                    });
+            });
+
+    });
+
     it('should be Shop', function (done) {
 
         request(app)
