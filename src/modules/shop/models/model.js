@@ -9,8 +9,11 @@ var ShopSchema = new Schema({
         type: String,
         required: 'Please fill a Shop name',
     },
-    image:{
-        type:String
+    user_id: {
+        type: String
+    },
+    image: {
+        type: String
     },
     imagereview: {
         type: [String]
@@ -25,30 +28,30 @@ var ShopSchema = new Schema({
             }
         }
     },
-    
-    starttime:{
-        type:Date
+
+    starttime: {
+        type: Date
     },
-    endtime:{
-        type:Date
+    endtime: {
+        type: Date
     },
     house_no: {
         type: String,
     },
-    village:{
-        type:String
+    village: {
+        type: String
     },
-    subdistrict:{
-        type:String
+    subdistrict: {
+        type: String
     },
-    district:{
-        type:String
+    district: {
+        type: String
     },
-    province:{
-        type:String
+    province: {
+        type: String
     },
-    postalcode:{
-        type:String
+    postalcode: {
+        type: String
     },
     created: {
         type: Date,
