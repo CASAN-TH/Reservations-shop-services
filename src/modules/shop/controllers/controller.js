@@ -1,12 +1,12 @@
 'use strict';
 var mongoose = require('mongoose'),
-    model = require('../models/model'), 
+    model = require('../models/model'),
     Shop = mongoose.model('Shop'),
     errorHandler = require('../../core/controllers/errors.server.controller'),
     _ = require('lodash');
-    
+
 exports.getList = function (req, res) {
-        Shop.find(function (err, datas) {
+    Shop.find(function (err, datas) {
         if (err) {
             return res.status(400).send({
                 status: 400,
@@ -40,9 +40,9 @@ exports.getShopList = function (req, res) {
 }
 
 exports.create = function (req, res) {
-        var newShop = new Shop(req.body);
-        newShop.createby = req.user;
-        newShop.save(function (err, data) {
+    var newShop = new Shop(req.body);
+    newShop.createby = req.user;
+    newShop.save(function (err, data) {
         if (err) {
             return res.status(400).send({
                 status: 400,
@@ -87,7 +87,7 @@ exports.read = function (req, res) {
 };
 
 exports.getShopByID = function (req, res, next, id) {
-    
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).send({
             status: 400,
@@ -142,3 +142,29 @@ exports.delete = function (req, res) {
         };
     });
 };
+exports.findUserById = (req, res, next, id) => {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).send({
+            status: 400,
+            message: 'Id is invalid'
+        });
+    }
+    Shop.find({ "createby._id": id }, function (err, data) {
+        if (err) {
+            return res.status(400).send({
+                status: 400,
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            req.data = data ? data : {};
+            console.log(req.data)
+            next();
+        };
+    });
+}
+exports.returnData = (req, res) => {
+    res.jsonp({
+        status: 200,
+        data: req.data
+    });
+}

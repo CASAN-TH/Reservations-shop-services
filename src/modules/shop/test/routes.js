@@ -114,7 +114,33 @@ describe('Shop CRUD routes tests', function () {
             });
 
     });
+   xit('should be ShopUser get by id', function (done) {
+        request(app)
+            .post('/api/shops')
+            .set('Authorization', 'Bearer ' + token)
+            .send(mockup)
+            .expect(200)
+            .end(function (err, res) {
+                if (err) {
+                    return done(err);
+                }
+                var resp = res.body;
+                request(app)
+                    .get('/api/shops-me/' + resp.data._id)
+                    .set('Authorization', 'Bearer ' + token)
+                    .expect(200)
+                    .end(function (err, res) {
+                        if (err) {
+                            return done(err);
+                        }
+                        var resp = res.body;
+                        assert.equal(resp.status, 200);
 
+                        done();
+                    });
+            });
+
+    });
     it('should be Shop Detail get by id', function (done) {
 
         request(app)
