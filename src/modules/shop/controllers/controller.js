@@ -149,7 +149,7 @@ exports.findUserById = (req, res, next, id) => {
             message: 'Id is invalid'
         });
     }
-    Shop.find({ "createby._id": id }, function (err, data) {
+    Shop.find({ user_id: id }, function (err, data) {
         if (err) {
             return res.status(400).send({
                 status: 400,
