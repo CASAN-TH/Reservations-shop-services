@@ -15,8 +15,13 @@ module.exports = function (app) {
 
     app.route('/api/shoplist')
         .get(controller.getShopList)
+    app.route('/api/shops-me/:id')
+        .get(
+            controller.returnData
+        ),
 
-    app.route('/api/shoplist/:shopId')
-        .get(controller.read)
+        app.route('/api/shoplist/:shopId')
+            .get(controller.read)
     app.param('shopId', controller.getByID, controller.getShopByID);
+    app.param('id', controller.findUserById)
 }
