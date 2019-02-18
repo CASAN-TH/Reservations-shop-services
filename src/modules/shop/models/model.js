@@ -30,10 +30,10 @@ var ShopSchema = new Schema({
     },
 
     starttime: {
-        type: Date
+        type: String
     },
     endtime: {
-        type: Date
+        type: String
     },
     house_no: {
         type: String,
