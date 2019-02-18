@@ -12,6 +12,9 @@ var ShopSchema = new Schema({
     user_id: {
         type: String
     },
+    peoples:{
+        type:String
+    },
     image: {
         type: String
     },
